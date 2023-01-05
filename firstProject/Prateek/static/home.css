@@ -1,0 +1,25 @@
+h1 {
+    color: blue;
+    text-align: center;
+}
+p {
+    color: cadetblue;
+    text-align: center;
+    font-size: 30px;
+}
+a {
+    font-size: 30px;
+    font-family: sans-serif;
+    text-decoration-line: none;
+}
+ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+}
+body{
+    background-color:antiquewhite;
+}
+a:hover{
+    background-color:hotpink;
+}
