@@ -1,0 +1,41 @@
+body {
+    font-family: sans-serif;
+    background-color: aquamarine;
+
+}
+nav{
+    border: 2px solid black;
+}
+
+a {
+    font-size: 30px;
+    text-decoration-line: none;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+h1,
+h2 {
+    text-align: center;
+}
+
+main {
+    margin-left: 650px;
+    margin-right: 650px;
+}
+
+.left-span {
+    text-align: right;
+    display: inline-block;
+    width: 200px;
+    line-height: 2.3;
+}
+
+#header,
+#footer {
+    margin: 80px;
+}
