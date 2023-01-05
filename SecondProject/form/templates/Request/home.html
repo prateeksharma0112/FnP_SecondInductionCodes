@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GET & POST</title>
+    <link rel="stylesheet" href="{% static 'CSS/request.css' %}">
+</head>
+
+<body>
+    <header id="header">
+        <h1>Today, We Will Learn GET & POST Request Method</h1>
+    </header>
+    <main>
+        <form action="" method="post">
+            {% csrf_token %}
+            <h3>Please Enter Employee Details :</h3>
+            <div>
+                <span class="left-span"><label for="E_name">Employee Name :</label></span>
+                <span class="right-span"><input type="text" name="Employee_name" id="E_name" value=""
+                        placeholder="Enter Your FullName" required></span>
+            </div>
+            <div>
+                <span class="left-span"><label for="gender">Gender :</label></span>
+                <span class="right-span">
+                    <label for="male">Male</label>
+                    <input type="radio" name="E_Gender" value="Male" id="male">
+                    <label for="female">Female</label>
+                    <input type="radio" name="E_Gender" value="Female" id="female">
+                </span>
+            </div>
+            <div>
+                <span class="left-span"><label for="DOB">DOB :</label></span>
+                <span class="right-span"><input type="date" name="Date_Of_Birth" id="DOB"></span>
+            </div>
+            <div>
+                <span class="left-span"><label for="email">Email ID :</label></span>
+                <span class="right-span"><input type="email" name="Email_Id" id="email"></span>
+            </div>
+            <div>
+                <span class="left-span"><label for="YOE">Year's Of Experience :</label></span>
+                <span class="right-span">
+                    <select name="Year_Of_Experience" id="YOE">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select></span>
+            </div>
+            <div>
+                <span class="left-span"><label for="telephone">Mobile Number:</label></span>
+                <span class="right-span"><input type="tel" name="Mobile_Number" id="telephone"></span>
+            </div>
+            <div>
+                <span class=" left-span"><label for="salary">Current CTC :</label></span>
+                <span class="right-span"><input type="text" id="salary" name="Salary" value=""></span>
+            </div>
+            <div>
+                <span class="right-span"><input type="submit" value="Submit Your Details"></span>
+            </div>
+        </form>
+    </main>
+    <Footer id="footer">
+        <h2>GoodBye and All The Best For Your Future Tasks, You are Doing Great Job!!!!!!</h2>
+    </Footer>
+</body>
+
+</html>

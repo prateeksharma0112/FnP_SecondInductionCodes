@@ -1,0 +1,230 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD</title>
+    <link rel="stylesheet" href="{% static 'CSS/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/crud.css' %}">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+    <!-- our project just needs Font Awesome Solid + Brands -->
+    <link href="{%  static 'CSS/fontawesome-free-6.2.0-web/css/fontawesome.css' %}" rel="stylesheet">
+    <link href="{%  static 'CSS/fontawesome-free-6.2.0-web/css/brands.css' %}" rel="stylesheet">
+    <link href="{%  static 'CSS/fontawesome-free-6.2.0-web/css/solid.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+    <header id="header">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="layout">Layout Design</a></li>
+                <li><a href="request">POST Request</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- Add Employee-->
+        <button type="button" class="btn btn-success" style="width: 100%;" data-bs-toggle="modal"
+            data-bs-target="#addModal"><i class="fa-sharp fa-solid fa-user-plus"></i> ADD EMPLOYEE</button>
+
+        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="addModalLabel"><i class="fa-solid fa-user-plus"></i> Enter Details
+                            Of New Employee</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" value="" name="numberOfBlocks" />
+                            <div class="mb-3">
+                                <label for="e-name" class="col-form-label">Employee Name :</label>
+                                <input type="text" class="form-control" name="employee_name" id="e-name" value=""
+                                    placeholder="Enter Your FullName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="gender" class="col-form-label">Gender :</label>
+                                <label for="male"> Male </label>
+                                <input type="radio" name="employee_gender" value="Male" id="male" required>
+                                <label for="female"> Female </label>
+                                <input type="radio" name="employee_gender" value="Female" id="female">
+                            </div>
+                            <div class="mb-3">
+                                <label for="DOB" class="col-form-label">DOB :</label>
+                                <input type="date" class="form-control" name="Date_Of_Birth" id="DOB">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="col-form-label">Email ID :</label>
+                                <input type="email" class="form-control" name="Email_Id" id="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="YOE" class="col-form-label">Year's Of Experience :</label>
+                                <select name="Year_Of_Experience" class="form-control" id="YOE">
+                                    <option value=""></option>
+                                    <option value="0 Years">Fresher</option>
+                                    <option value="1 Years">1 Years</option>
+                                    <option value="2 Years">2 Years</option>
+                                    <option value="3 Years">3 Years</option>
+                                    <option value="4 Years">4 Years</option>
+                                    <option value="5 Years">5 Years</option>
+                                    <option value="6 Years">6 Years</option>
+                                    <option value="7 Years">7 Years</option>
+                                    <option value="8 Years">8 Years</option>
+                                    <option value="9 Years">9 Years</option>
+                                    <option value="10 Years">10 Years</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="telephone" class="col-form-label">Mobile Number:</label>
+                                <input type="tel" class="form-control" name="mobile_number" id="telephone">
+                            </div>
+                            <div class="mb-3">
+                                <label for="salary" class="col-form-label">Current CTC :</label>
+                                <input type="text" class="form-control" id="salary" name="Salary" value="">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table For Employees-->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Employee-ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">DOB</th>
+                    <th scope="col">Email-Id</th>
+                    <th scope="col">Year Of Experience</th>
+                    <th scope="col">Mobile-No</th>
+                    <th scope="col">Current-CTC</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                {% for l in e_list %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{l.2}}</td>
+                    <td>{{l.3}}</td>
+                    <td>{{l.4}}</td>
+                    <td>{{l.5}}</td>
+                    <td>{{l.6}}</td>
+                    <td>{{l.7}}</td>
+                    <td>{{l.8}}</td>
+                    <td><button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#editModal-{{forloop.counter}}"><i class="fa-solid fa-user-pen"></i>
+                            Edit</button></td>
+                    <td><button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#deleteModal-{{forloop.counter}}"><i class="fa-solid fa-trash"></i>
+                            Delete</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% for l in e_list %}
+
+        <!-- Delete Employee-->
+        <div class="modal fade" id="deleteModal-{{forloop.counter}}" tabindex="-1" aria-labelledby="deleteModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel"><i class="fa-solid fa-trash"></i>
+                            Delete Employee
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure, you want to delete <b>{{l.2}}</b> from Employee Records?</p>
+                        <p class="text-warning"><small>This Action Cannot Be Undone !!!</small></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Exit</button>
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{forloop.counter0}}" name="del-id">
+                            <input type="hidden" value="del" name="DELETE">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- Edit Employee-->
+        {% for l in e_list %}
+        <div class="modal fade" id="editModal-{{forloop.counter}}" tabindex="-1" aria-labelledby="editModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="editModalLabel"><i class="fa-solid fa-user-pen"></i> Edit The
+                            Employee Data</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="e-name" class="col-form-label">Employee Name :</label>
+                                <input type="text" class="form-control" name="employee-name" id="e-name" value="{{l.2}}"
+                                    placeholder="Enter Your FullName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="gender" class="col-form-label">Gender :</label>
+                                <input type="text" class="form-control" id="gender" name="Gender" value="{{l.3}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="DOB" class="col-form-label">DOB :</label>
+                                <input type="date" class="form-control" name="Date_Of_Birth" id="DOB" value="{{l.4}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="col-form-label">Email ID :</label>
+                                <input type="email" class="form-control" name="Email_Id" id="email" value="{{l.5}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="YOE" class="col-form-label">Year's Of Experience :</label>
+                                <input type="text" class="form-control" name="Year_Of_Experience" id="YOE"
+                                    value="{{l.6}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="telephone" class="col-form-label">Mobile Number:</label>
+                                <input type="tel" class="form-control" name="Mobile_Number" id="telephone"
+                                    value="{{l.7}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="salary" class="col-form-label">Current CTC :</label>
+                                <input type="text" class="form-control" id="salary" name="Salary" value="{{l.8}}">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
+                                <input type="hidden" value="{{forloop.counter0}}" name="edit-id">
+                                <!-- <input type="hidden" value="edit" name="EDIT"> -->
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </main>
+</body>
+
+</html>

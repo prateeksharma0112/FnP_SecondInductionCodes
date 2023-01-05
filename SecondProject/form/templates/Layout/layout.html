@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Prateek Kumar Sharma" />
+    <meta name="keywords" content="Layout, Prateek, CSS, Grid, flexboxes, DOM, Float" />
+    <meta name="description" content="This is a sample Responsive Layout just to learn about MediaQueries and float" />
+    <meta name="revised" content="Fun with CSS" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prateek-sharma-Layout</title>
+    <link rel="stylesheet" href="{% static 'CSS/layout.css' %}">
+<body>
+    <header class="head">
+        <div class="head-div">LOGO</div>
+    </header>
+    <main class="main">
+        <nav class="left">
+            <ul>
+                <li><a href="https://www.facebook.com">Facebook</a></li>
+                <li><a href="https://www.twitter.com">Twitter</a></li>
+                <li><a href="https://www.linkedin.com">LinkedIn</a></li>
+                <li><a href="https://www.snapchat.com">Snapchat</a></li>
+                <li><a href="https://www.gmail.com">Gmail</a></li>
+            </ul>
+        </nav>
+        <div class="right">
+            <div class="right-div-1">
+                <div class="banner" id="b1">BANNER-1</div>
+                <div class="banner" id="b2">BANNER-2</div>
+            </div>
+            <div class="right-div-2">
+                <div class="block" id="bl1">BLOCK-1</div>
+                <div class="block" id="bl2">BLOCK-2</div>
+                <div class="block" id="bl3">BLOCK-3</div>
+            </div>
+        </div>
+    </main>
+    <footer class="foot">
+        <div class="foot-div">FOOTER</div>
+    </footer>
+</body>
+
+</html>
